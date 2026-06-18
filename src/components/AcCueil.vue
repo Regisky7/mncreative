@@ -1,390 +1,335 @@
-<script setup>
-// MGN Créative — Page Services
-// Vue 3 <script setup> + Tailwind CSS
-//
-// Assets Figma (URLs temporaires ~7 jours — remplace-les en production)
-const heroImage =
-  "https://www.figma.com/api/mcp/asset/65f5b4ce-ceaf-4b6f-bde8-54ea03296df4";
-const cardsTexture =
-  "https://www.figma.com/api/mcp/asset/89fb1a7a-e523-4d64-bbc8-2a452f1a7665";
-
-// --- Section "Pour les marques" ---
-const brandFeatures = [
-  {
-    n: "01 — Accès privilégié",
-    text: "Nous offrons un accès direct à des professionnels de haut niveau et aux géants de l'industrie, garantissant que votre message parvienne aux mains les plus influentes.",
-  },
-  {
-    n: "02 — Intégration harmonisée",
-    text: "Les partenariats sont minutieusement sélectionnés pour garantir une résonance organique entre les valeurs de la marque et l'identité des talents, évitant ainsi l'aspect purement transactionnel des agences traditionnelles.",
-  },
-];
-
-// --- Cartes de formules ---
-// theme: 'light' (fond blanc) | 'dark' (fond noir, mise en avant)
-const plans = [
-  {
-    n: "01",
-    name: "ESSENTIELLE",
-    tagline: "Personal Branding de base",
-    theme: "light",
-    features: [
-      "AUDIT D'IMAGE",
-      "STRATÉGIE DE POSITIONNEMENT",
-      "OPTIMISATION RÉSEAUX",
-    ],
-    cta: "CHOISIR CE PACK",
-    ctaStyle: "outline",
-    featured: false,
-  },
-  {
-    n: "02",
-    name: "PREMIUM",
-    tagline: "Branding + Production de contenu",
-    theme: "dark",
-    features: [
-      "TOUT LE PACK ESSENTIELLE",
-      "2 SESSIONS PHOTO STUDIO / MOIS",
-      "CRÉATION DE REELS EDITORIAUX",
-      "DIRECTION ARTISTIQUE",
-    ],
-    cta: "DÉCOUVRIR LE PREMIUM",
-    ctaStyle: "gold",
-    featured: true,
-  },
-  {
-    n: "03",
-    name: "SIGNATURE",
-    tagline: "Accompagnement complet",
-    theme: "light",
-    features: [
-      "CONCIERGERIE IMAGE 24/7",
-      "RELATIONS PRESSE & AGENCES",
-      "PLACEMENT ÉVÉNEMENTIEL VIP",
-      "GESTION DE CARRIÈRE TOTALE",
-    ],
-    cta: "CONTACTER L'AGENCE",
-    ctaStyle: "black",
-    featured: false,
-  },
-];
-
-// Réordonné pour l'affichage : Essentielle, Premium (au centre), Signature
-const orderedPlans = [plans[0], plans[1], plans[2]];
-</script>
-
 <template>
-  <main
-    class="flex flex-col items-center gap-32 pt-32 pb-32 w-full bg-[#131313] text-white font-body"
-  >
-    <!-- ===================== Hero + Marques ===================== -->
-    <section class="w-full max-w-[1280px] px-6 flex flex-col gap-4">
-      <!-- diamond accent -->
-      <span class="block size-2 rotate-45 bg-[#c5a059]" aria-hidden="true" />
+  <div class="min-h-screen flex flex-col bg-[#131313]">
+    <!-- ─── TOP NAV ─── -->
+    <header
+      class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 h-28 border-b border-[#c5a059]/20 bg-black/95 backdrop-blur-md"
+    >
+      <img :src="logoSrc" alt="MGN Créative" class="h-24 w-auto" />
+      <nav class="hidden md:flex items-center gap-12 font-sans">
+        <a
+          href="#"
+          class="text-xs tracking-[0.2em] uppercase border-b border-[#c5a059] text-[#c5a059] pb-1"
+          >ACCUEIL</a
+        >
+        <a
+          href="#"
+          class="text-xs tracking-[0.2em] uppercase text-[#d6d3d1] hover:text-[#e8c176] transition-colors"
+          >SERVICES</a
+        >
+        <a
+          href="#"
+          class="text-xs tracking-[0.2em] uppercase text-[#d6d3d1] hover:text-[#e8c176] transition-colors"
+          >CONTACT</a
+        >
+      </nav>
+    </header>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end pb-32">
-        <!-- Texte hero -->
-        <div class="lg:col-span-8 flex flex-col">
-          <div class="flex items-center gap-6 mb-4">
-            <span class="size-2 rotate-45 bg-[#c5a059]" aria-hidden="true" />
-            <span class="text-xs font-medium tracking-[0.4em] text-[#e8c176]"
-              >LUXURY IDENTITY</span
-            >
-          </div>
-
-          <h1
-            class="font-headline font-bold uppercase text-[#e2e2e2] text-5xl leading-tight tracking-tight"
-          >
-            NOS SERVICES
-          </h1>
-
-          <p class="max-w-md pt-4 text-lg leading-relaxed text-[#d1c5b4]">
-            MGN Créative hisse votre marque personnelle au niveau professionnel.
-            Trois niveaux d'excellence conçus pour le casting de mannequins.
-          </p>
-        </div>
-
-        <!-- Image hero (Strategic depth) -->
+    <main class="flex flex-col">
+      <!-- ─── HERO ─── -->
+      <section
+        class="relative min-h-[1200px] flex flex-col items-center justify-center pt-72 pb-48 overflow-hidden"
+      >
+        <!-- Background model -->
         <div
-          class="lg:col-span-4 relative h-[469px] overflow-hidden bg-[#e2e2e2]"
+          class="absolute inset-0 opacity-40 overflow-hidden pointer-events-none"
         >
           <img
-            :src="heroImage"
-            alt="Strategic depth"
-            class="absolute inset-0 w-full h-full object-cover"
+            :src="heroModelSrc"
+            alt=""
+            class="w-full h-[160%] object-cover absolute left-0 -top-[30%]"
           />
-          <div class="absolute bottom-6 left-6 flex flex-col gap-1 text-white">
-            <span
-              class="text-xs font-bold tracking-[0.2em]"
-              style="font-family: Manrope, sans-serif"
-              >STRATEGIC DEPTH</span
+        </div>
+        <!-- Black overlay -->
+        <div class="absolute inset-0 bg-black/40"></div>
+
+        <!-- Arch motif bottom -->
+        <div
+          class="absolute -bottom-24 left-0 right-0 flex justify-center pointer-events-none"
+        >
+          <div
+            class="border-l border-r border-t border-[#e8c176] w-24 h-48 rounded-t-full opacity-30"
+          ></div>
+        </div>
+
+        <!-- Content -->
+        <div
+          class="relative z-10 max-w-[1536px] w-full px-16 flex flex-col items-center"
+        >
+          <h1
+            class="text-white text-center font-serif font-normal mb-4"
+            style="
+              font-size: clamp(80px, 12vw, 230px);
+              line-height: 1;
+              letter-spacing: -0.05em;
+            "
+          >
+            <span class="block">MGN</span>
+            <span class="block">CRÉATIVE</span>
+          </h1>
+
+          <p
+            class="text-[#e8c176]/90 text-center font-serif text-base tracking-wide mb-12 max-w-3xl"
+          >
+            AGENCE DE PERSONAL BRANDING POUR TOP MODÈLES, PROMOTEURS &amp;
+            MARQUES
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-6">
+            <button
+              class="bg-[#e9c176] text-[#4e3700] font-sans text-lg px-12 py-5 hover:opacity-90 transition-opacity"
             >
-            <span class="text-2xl font-headline font-semibold">Est. 2024</span>
+              DEVENIR INCONTOURNABLE
+            </button>
+            <button
+              class="border border-[#e9c176] text-[#e8c176] font-sans text-lg px-12 py-5 hover:bg-[#e9c176]/10 transition-colors"
+            >
+              NOTRE PORTFOLIO
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Section "Pour les marques" -->
-      <div
-        class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-16 border-t border-[#775a19]/20"
-      >
-        <div class="lg:col-span-4 flex flex-col gap-4">
-          <h2
-            class="text-xs font-bold tracking-[0.2em] text-[#c5a059]"
-            style="font-family: Manrope, sans-serif"
-          >
-            POUR LES MARQUES
-          </h2>
-          <h3
-            class="font-headline font-semibold text-white text-4xl tracking-wide leading-tight"
-          >
-            CRÉATEUR DE LIENS
-          </h3>
-        </div>
-
-        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- ─── 4 PILIERS ─── -->
+      <section class="w-full bg-[#131313] px-12 md:px-48 py-32">
+        <div class="max-w-[1536px] mx-auto">
+          <!-- Header row -->
           <div
-            v-for="f in brandFeatures"
-            :key="f.n"
-            class="flex flex-col gap-4"
+            class="flex flex-col md:flex-row justify-between items-end gap-8 pb-12 border-b border-[#4e4639]"
           >
-            <span
-              class="text-xs font-bold tracking-[0.2em] text-[#c5a059]"
-              style="font-family: Manrope, sans-serif"
-            >
-              {{ f.n }}
-            </span>
+            <div class="max-w-xl">
+              <p class="text-[#e8c176] font-sans text-base mb-4">
+                NOTRE MÉTHODOLOGIE
+              </p>
+              <h2 class="text-white font-serif text-5xl leading-tight">
+                4 PILIERS DE SERVICE
+              </h2>
+            </div>
             <p
-              class="text-base leading-6 text-[#f5f5dc]"
-              style="font-family: Manrope, sans-serif"
+              class="text-[#c8c6c5] font-sans text-base md:text-right max-w-sm"
             >
-              {{ f.text }}
+              Une approche holistique pour transformer votre image en un atout
+              médiatique et commercial.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- ===================== Cartes de formules ===================== -->
-    <section
-      class="relative w-full px-6 lg:px-32 py-24 bg-[#f2efe9] bg-top bg-no-repeat"
-      :style="{ backgroundImage: `url('${cardsTexture}')` }"
-    >
-      <!-- accents flottants -->
-      <span
-        class="absolute left-9 top-10 size-3 bg-[#c5a059] opacity-20"
-        aria-hidden="true"
-      />
-      <span
-        class="absolute right-9 bottom-10 size-3 rotate-45 bg-[#c5a059] opacity-20"
-        aria-hidden="true"
-      />
-
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-[1280px] mx-auto"
-      >
-        <article
-          v-for="plan in orderedPlans"
-          :key="plan.name"
-          class="relative flex flex-col overflow-hidden border"
-          :class="
-            plan.theme === 'dark'
-              ? 'bg-black border-[#e9c176]/40 shadow-2xl'
-              : 'bg-white border-[#e9c176]/20 shadow-xl'
-          "
-        >
-          <!-- Badge "Most popular" -->
-          <span
-            v-if="plan.featured"
-            class="absolute left-1/2 -translate-x-1/2 top-6 z-10 px-4 py-1 bg-[#e8c176] text-black text-[9px] tracking-[0.2em]"
-            >MOST POPULAR</span
+          <!-- Cards grid -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-24"
           >
-
-          <!-- Image (arch) -->
-          <div class="px-8 pt-8">
             <div
-              class="h-[200px] rounded-t-full border overflow-hidden"
-              :class="
-                plan.theme === 'dark'
-                  ? 'border-[#e9c176]/20'
-                  : 'border-[#e9c176]/10'
-              "
+              v-for="pillar in pillars"
+              :key="pillar.num"
+              class="border border-[#4e4639] p-8 flex flex-col gap-4"
+              :class="pillar.dark ? 'bg-black' : 'bg-transparent'"
+            >
+              <div
+                class="w-12 h-12 rounded-full border border-[#e8c176] flex items-center justify-center"
+              >
+                <span class="text-[#e8c176] font-serif text-base">{{
+                  pillar.num
+                }}</span>
+              </div>
+              <h3 class="text-white font-serif uppercase text-xl pt-2">
+                {{ pillar.title }}
+              </h3>
+              <p class="text-[#c8c6c5] font-sans text-base leading-6">
+                {{ pillar.text }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── EDITORIAL FEATURE ─── -->
+      <section class="w-full bg-[#0e0e0e] px-12 md:px-64 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[700px]">
+          <!-- Arch image -->
+          <div
+            class="lg:col-span-7 border border-[#c5a059]/30 rounded-t-[500px] overflow-hidden flex items-center justify-center order-2 lg:order-1"
+          >
+            <img
+              :src="editorialImgSrc"
+              alt="Signature brand"
+              class="w-full h-full object-cover"
             />
           </div>
 
-          <!-- Corps -->
-          <div class="flex flex-col p-8">
-            <!-- numéro -->
-            <div
-              class="flex items-center justify-center size-10 rounded-full border border-[#e8c176] mb-6"
-            >
-              <span class="text-sm text-[#e8c176]">{{ plan.n }}</span>
-            </div>
-
-            <h3
-              class="font-headline font-semibold uppercase text-[32px] tracking-wide leading-tight"
-              :class="plan.theme === 'dark' ? 'text-[#e8c176]' : 'text-black'"
-            >
-              {{ plan.name }}
-            </h3>
-
+          <!-- Text col -->
+          <div
+            class="lg:col-span-5 flex flex-col gap-8 self-center pl-0 lg:pl-12 order-1 lg:order-2"
+          >
             <p
-              class="italic pb-4 mt-2 border-b"
-              :class="
-                plan.theme === 'dark'
-                  ? 'text-[#a8a29e] border-[#e9c176]/20'
-                  : 'text-[#78716c] border-[#e9c176]/10'
-              "
+              class="text-[#e8c176] font-sans text-base pb-2 border-b border-[#e8c176]/30 self-start"
             >
-              {{ plan.tagline }}
+              MANIFESTE
+            </p>
+            <h2
+              class="text-white font-serif text-3xl md:text-4xl leading-tight uppercase"
+            >
+              L'EXCELLENCE N'EST PAS UNE OPTION, C'EST VOTRE STANDARD.
+            </h2>
+            <p
+              class="text-[#c8c6c5] font-sans text-base md:text-lg leading-relaxed"
+            >
+              "Dans un monde complètement digitalisé, votre image est votre
+              meilleur atout. Nous bâtissons des gourous du digital."
             </p>
 
-            <ul class="flex flex-col gap-4 pt-6">
-              <li
-                v-for="feat in plan.features"
-                :key="feat"
-                class="flex items-center gap-3"
-              >
-                <span
-                  class="size-1.5 rotate-45 bg-[#c5a059] shrink-0"
-                  aria-hidden="true"
-                />
-                <span
-                  class="text-[10px] tracking-wide"
-                  :class="
-                    plan.theme === 'dark' ? 'text-[#d6d3d1]' : 'text-[#57534e]'
-                  "
-                  >{{ feat }}</span
+            <ul class="space-y-4">
+              <li class="flex items-center gap-4">
+                <svg
+                  class="w-6 h-6 text-[#e8c176] flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+                <span class="text-white font-sans text-base"
+                  >CURATION DE TALENT EXCLUSIVE</span
+                >
+              </li>
+              <li class="flex items-center gap-4">
+                <svg
+                  class="w-6 h-6 text-[#e8c176] flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+                <span class="text-white font-sans text-base"
+                  >STRATÉGIE DE HAUT NIVEAU</span
                 >
               </li>
             </ul>
 
-            <!-- CTA -->
             <button
-              class="mt-12 w-full py-4 text-center text-base transition-opacity hover:opacity-90"
-              :class="{
-                'border border-[#e9c176] text-[#e8c176]':
-                  plan.ctaStyle === 'outline',
-                'bg-[#e9c176] text-black': plan.ctaStyle === 'gold',
-                'bg-black text-white': plan.ctaStyle === 'black',
-              }"
+              class="bg-white text-black font-sans text-base px-10 py-4 self-start hover:bg-[#e9c176] transition-colors"
             >
-              {{ plan.cta }}
+              RÉSERVER UN AUDIT
             </button>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===================== Citation ===================== -->
-    <section class="w-full px-6 lg:px-48 py-24">
-      <div
-        class="flex flex-col md:flex-row gap-6 items-center max-w-[1152px] mx-auto"
-      >
-        <!-- silhouette (arch) -->
-        <div
-          class="shrink-0 w-56 h-80 rounded-t-full p-2 border border-[#e9c176]/40 bg-[#1f2020]"
-        />
-
-        <div class="flex flex-col gap-6 flex-1">
-          <span class="size-2 rotate-45 bg-[#c5a059]" aria-hidden="true" />
-          <blockquote
-            class="font-headline text-[#e2e2e2] text-5xl leading-tight"
-          >
-            « Le luxe n'est pas une question de visibilité. C'est une présence
-            inoubliable. »
-          </blockquote>
-          <p class="text-xs font-medium tracking-[0.4em] text-[#e8c176]">
-            — MGN CRÉATIVE
-          </p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===================== Méthodologie (Bento) ===================== -->
-    <section class="w-full max-w-[1280px] px-6 flex flex-col gap-16">
-      <div class="flex flex-col items-center gap-3">
-        <span class="size-2 rotate-45 bg-[#c5a059]" aria-hidden="true" />
-        <h2
-          class="font-headline font-semibold uppercase text-[#e2e2e2] text-3xl tracking-[0.2em] text-center"
-        >
-          NOTRE MÉTHODOLOGIE
-        </h2>
-      </div>
-
-      <div
-        class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[600px]"
-      >
-        <!-- 01 — Audit d'identité (grande tuile gauche) -->
+      <!-- ─── OFFRE SIGNATURE ─── -->
+      <section class="w-full bg-[#131313] px-6 md:px-32 lg:px-[512px] py-32">
         <div
-          class="md:col-span-2 md:row-span-2 relative flex flex-col justify-end p-12 bg-[#1b1c1c] border border-[#9a8f80]/20 overflow-hidden"
+          class="bg-black border border-[#e8c176] max-w-4xl mx-auto p-12 md:p-20 flex flex-col items-center text-center gap-4 relative"
         >
-          <span
-            class="absolute left-8 top-8 flex items-center justify-center size-12 rounded-full border border-[#e9c176]/30 text-[#e9c176]/40"
-            >01</span
+          <p
+            class="text-[#e8c176] font-sans text-base tracking-[0.2em] uppercase"
           >
-          <h4
-            class="font-headline font-medium uppercase text-[#e2e2e2] text-2xl leading-snug mb-4"
-          >
-            AUDIT D'IDENTITÉ
-          </h4>
-          <p class="max-w-sm text-[#d1c5b4] leading-6">
-            Nous analysons votre profil actuel et définissons vos objectifs de
-            carrière avec une précision chirurgicale.
+            L'OFFRE SIGNATURE
           </p>
-        </div>
-
-        <!-- 02 — Design narratif (tuile large haut-droite) -->
-        <div
-          class="md:col-span-2 flex items-center gap-8 p-12 bg-[#2a2a2a] border border-[#9a8f80]/20"
-        >
-          <span
-            class="shrink-0 flex items-center justify-center size-12 rounded-full border border-[#e9c176]/30 text-[#e9c176]/30"
-            >02</span
+          <h2 class="text-white font-serif text-3xl md:text-4xl">
+            LE CERCLE DES ÉLITES
+          </h2>
+          <p
+            class="text-[#c8c6c5] font-sans text-base md:text-lg pt-4 max-w-2xl"
           >
-          <div class="flex flex-col gap-2">
-            <h4
-              class="font-headline font-medium uppercase text-[#e2e2e2] text-2xl leading-snug"
+            Un accompagnement VIP complet sur 12 mois pour redéfinir
+            intégralement votre trajectoire de carrière et vos revenus.
+          </p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-8 justify-center py-8">
+            <span
+              v-for="tag in offerTags"
+              :key="tag"
+              class="border border-[#4e4639] text-[#e2e2e2] font-sans text-xs px-6 py-2"
             >
-              DESIGN NARRATIF
-            </h4>
-            <p class="text-[#d1c5b4] leading-6">
-              Un plan d'action sur mesure pour votre déploiement digital et
-              physique.
-            </p>
+              {{ tag }}
+            </span>
           </div>
-        </div>
 
-        <!-- 03 — Création de contenus -->
-        <div
-          class="relative flex flex-col items-center justify-center p-10 bg-black border border-[#9a8f80]/20"
-        >
-          <span
-            class="flex items-center justify-center size-10 rounded-full border border-[#e9c176]/30 text-[#e9c176]/30 mb-4"
-            >03</span
+          <button
+            class="bg-[#e9c176] text-black font-sans text-xl tracking-[0.1em] px-16 py-6 hover:opacity-90 transition-opacity"
           >
-          <p
-            class="text-xs font-medium tracking-[0.2em] uppercase text-[#e8c176] text-center"
-          >
-            Création de contenus
-          </p>
+            DEMANDER L'ACCÈS
+          </button>
         </div>
+      </section>
+    </main>
 
-        <!-- 04 — Accélérateur d'influence -->
-        <div
-          class="relative flex flex-col items-center justify-center p-10 bg-[#353535] border border-[#e9c176]/30"
+    <!-- ─── FOOTER ─── -->
+    <footer class="w-full border-t border-[#c5a059]/20 py-24 bg-black relative">
+      <div class="flex flex-col items-center mb-8">
+        <img :src="logoSrc" alt="MGN Créative" class="h-20 w-auto mb-2" />
+        <p
+          class="text-2xl tracking-[0.4em] uppercase text-[#c5a059] font-serif font-light"
         >
-          <span
-            class="flex items-center justify-center size-10 rounded-full border border-[#e9c176]/30 text-[#e9c176]/30 mb-4"
-            >04</span
-          >
-          <p
-            class="text-xs font-medium tracking-[0.2em] uppercase text-[#e8c176] text-center"
-          >
-            ACCÉLÉRATEUR D'INFLUENCE
-          </p>
-        </div>
+          AGENCE MGN CREATIVE
+        </p>
       </div>
-    </section>
-  </main>
+
+      <div class="flex justify-center gap-16 mb-8">
+        <a
+          href="#"
+          class="text-[10px] tracking-[0.2em] uppercase text-center leading-relaxed text-[#78716c] hover:text-[#e8c176] font-sans transition-colors"
+        >
+          POLITIQUE DE<br />CONFIDENTIALITÉ
+        </a>
+        <a
+          href="#"
+          class="text-[10px] tracking-[0.2em] uppercase text-center leading-relaxed text-[#78716c] hover:text-[#e8c176] font-sans transition-colors"
+        >
+          CONDITIONS<br />D'UTILISATION
+        </a>
+      </div>
+
+      <div class="flex justify-center mb-6">
+        <div class="w-24 h-px bg-[#c5a059]/30"></div>
+      </div>
+
+      <p
+        class="text-center text-[9px] tracking-[0.2em] uppercase text-[#c5a059]/60 font-sans"
+      >
+        © 2026 ELITE BRANDING AGENCY. TOUS DROITS RÉSERVÉS.
+      </p>
+    </footer>
+  </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+
+// Assets Figma (valables 7 jours — à remplacer par tes fichiers locaux)
+const logoSrc = ref(
+  "https://www.figma.com/api/mcp/asset/6a970d4e-5705-4f6b-b8be-a8b1e8e21661",
+);
+const heroModelSrc = ref(
+  "https://www.figma.com/api/mcp/asset/b701d884-99f5-4473-8e27-2eafba03de4b",
+);
+const editorialImgSrc = ref(
+  "https://www.figma.com/api/mcp/asset/3bb0e64d-3f79-42e7-a770-547aceddb82e",
+);
+
+const pillars = ref([
+  {
+    num: "01",
+    title: "Identité Visuelle",
+    text: "Direction artistique sur-mesure, et shooting éditoriaux.",
+    dark: false,
+  },
+  {
+    num: "02",
+    title: "Social Scaling",
+    text: "Stratégie de croissance organique et gestion de réputation pour dominer votre niche.",
+    dark: true,
+  },
+  {
+    num: "03",
+    title: "Monétisation",
+    text: "Partenariats de marques premium et création d'offres exclusives pour votre audience.",
+    dark: false,
+  },
+  {
+    num: "04",
+    title: "Legacy Design",
+    text: "Positionnement à long terme pour passer de modèle à icône culturelle intemporelle.",
+    dark: false,
+  },
+]);
+
+const offerTags = ref(["IMMERSION 48H", "RÉSEAU PRIVÉ", "AGENCE DÉDIÉE"]);
+</script>
