@@ -162,7 +162,7 @@
         </div>
       </section>
 
-      <!-- ─── MARQUEE TAGLINE ─── -->
+      <!-- ─── MARQUE TAGLINE ─── -->
       <section
         class="w-full bg-black border-y border-[#c5a059]/20 py-6 overflow-hidden"
       >
@@ -470,18 +470,18 @@
       </div>
 
       <div class="flex justify-center gap-16 mb-8">
-        <a
-          href="#"
+        <router-link
+          to="/politique-de-confidentialite"
           class="text-[10px] tracking-[0.2em] uppercase text-center leading-relaxed text-[#78716c] hover:text-[#e8c176] font-sans transition-colors"
         >
           POLITIQUE DE<br />CONFIDENTIALITÉ
-        </a>
-        <a
-          href="#"
+        </router-link>
+        <router-link
+          to="/conditions-d-utilisation"
           class="text-[10px] tracking-[0.2em] uppercase text-center leading-relaxed text-[#78716c] hover:text-[#e8c176] font-sans transition-colors"
         >
           CONDITIONS<br />D'UTILISATION
-        </a>
+        </router-link>
       </div>
 
       <div class="flex justify-center mb-6">

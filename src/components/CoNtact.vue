@@ -636,7 +636,7 @@
     </main>
 
     <!-- ─── FOOTER ─── -->
-    <footer class="w-full border-t border-[#c5a059]/20 py-16 bg-black">
+    <footer class="w-full border-t border-[#c5a059]/20 py-24 bg-black relative">
       <div class="flex flex-col items-center mb-8">
         <img
           :src="logoSrc"
@@ -644,26 +644,31 @@
           class="h-20 w-auto mb-2 transition-transform duration-500 hover:scale-110"
         />
         <p
-          class="text-2xl tracking-[0.6em] uppercase text-[#c5a059] font-serif font-light"
+          class="text-2xl tracking-[0.4em] uppercase text-[#c5a059] font-serif font-light"
         >
           AGENCE MGN CREATIVE
         </p>
       </div>
+
       <div class="flex justify-center gap-16 mb-8">
-        <a
-          href="#"
+        <router-link
+          to="/politique-de-confidentialite"
           class="text-[10px] tracking-[0.2em] uppercase text-center leading-relaxed text-[#78716c] hover:text-[#e8c176] font-sans transition-colors"
-          >POLITIQUE DE<br />CONFIDENTIALITÉ</a
         >
-        <a
-          href="#"
+          POLITIQUE DE<br />CONFIDENTIALITÉ
+        </router-link>
+        <router-link
+          to="/conditions-d-utilisation"
           class="text-[10px] tracking-[0.2em] uppercase text-center leading-relaxed text-[#78716c] hover:text-[#e8c176] font-sans transition-colors"
-          >CONDITIONS<br />D'UTILISATION</a
         >
+          CONDITIONS<br />D'UTILISATION
+        </router-link>
       </div>
+
       <div class="flex justify-center mb-6">
         <div class="w-24 h-px bg-[#c5a059]/30"></div>
       </div>
+
       <p
         class="text-center text-[9px] tracking-[0.2em] uppercase text-[#c5a059]/60 font-sans"
       >
